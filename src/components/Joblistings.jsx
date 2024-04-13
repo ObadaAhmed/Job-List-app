@@ -10,10 +10,11 @@ const Joblistings = ({isHomePage = false}) => {
 
   useEffect(() => {
     const fecthJobs = async () => {
+      const apiUrl = isHomePage ? '/api/jobs?_limit=3' : '/api/jobs'
       try {
-        const res = await fetch('http://localhost:8080/jobs');
-        const data = await res.json();
-        setJobs(data)
+        const res = await fetch(apiUrl);
+        const fetchedJobs =  await res.json();
+        setJobs(fetchedJobs)
       } catch (error) {
         console.error('error fetching Jobs Data : ' , error)
       }finally {
